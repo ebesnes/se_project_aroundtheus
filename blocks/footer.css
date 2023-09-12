@@ -1,0 +1,28 @@
+.footer{
+    font-family: inherit;
+    color: #545454;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0em;
+    margin: 50px auto 50px;
+}
+
+.footer__copyright{
+    margin: 0;
+}
+
+@media screen and (max-width: 595px){
+    .footer{
+        max-width: 282px;
+        margin: 20px auto 20px auto;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 895px) and (min-width: 596px){
+    .footer{
+        max-width: 580px;
+        margin: 30px auto 30px auto;
+    }
+}
