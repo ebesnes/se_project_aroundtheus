@@ -1,13 +1,13 @@
 .header__logo {
     max-width: 173px;
     max-height: 33px;
-    margin: 45px 0 41px;
+    margin: 40px 0 40px;
 }
 
-header{
+.header{
     display: block;
-    border-bottom: 1px solid #545454;
     flex-grow: 1;
+    border-bottom: 1px solid rgba(84, 84, 84, 0.7)
 }
 
 @media screen and (max-width: 595px) and (min-width: 200px){

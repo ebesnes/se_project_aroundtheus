@@ -3,6 +3,9 @@
     align-items: center;
     padding-top: 40px;
     font-family: inherit;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .profile__info{
@@ -16,7 +19,7 @@
 }
 
 .profile__edit-button{
-    background: transparent url(../images/Edit\ Button.png) center no-repeat;
+    background: transparent url(../images/Edit_Button.svg) center no-repeat;
     height: 24px;
     width: 24px;
     border: 1px solid white;
@@ -26,6 +29,7 @@
 
 .profile__edit-button:hover{
     opacity: 60%;
+    cursor: pointer;
 }
 
 .profile__add-button{
@@ -58,10 +62,7 @@
     letter-spacing: 0em;
     grid-area: description;
     margin: 0;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     max-width: 373px;
-    overflow: hidden;    
 }
 
 .profile__image{
@@ -91,9 +92,6 @@
         font-size: 22px;
         line-height: 27px;
         text-align: center;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
     }
 
     .profile__description {
@@ -101,9 +99,6 @@
         text-align: center;
         font-size: 14px;
         line-height: 17px;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
     }
 
     .profile__edit-button{
