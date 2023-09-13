@@ -1,4 +1,4 @@
-.cards__gallery{
+.cards{
     display: grid;
     justify-content: center;
     grid-template-columns: repeat(auto-fit, 282px);
@@ -6,16 +6,4 @@
     list-style-type: none;
     padding: 0;
     margin: 60px 0 0;
-}
-
-@media screen and (max-width: 620px){
-    .cards__gallery{
-        margin: 35px 0 0 0;
-    }
-}
-
-@media screen and (max-width: 900px) and (min-width: 621px){
-    .cards__gallery{
-        margin: 40px 0 0 0;
-    }
 }

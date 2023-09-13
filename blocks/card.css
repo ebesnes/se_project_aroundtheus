@@ -42,3 +42,15 @@
     opacity: 50%;
     cursor: pointer;
 }
+
+@media screen and (max-width: 620px){
+    .card__gallery{
+        margin: 35px 0 0 0;
+    }
+}
+
+@media screen and (max-width: 900px) and (min-width: 621px){
+    .card__gallery{
+        margin: 40px 0 0 0;
+    }
+}
