@@ -37,16 +37,18 @@
 
 .modal__close{
     border: none;
-    background-color: transparent;
+    background: transparent url(../images/Modal__Close_Icon.svg) no-repeat;
     cursor: pointer;
     position: absolute;
     bottom: calc(100% + 5px);
     left: calc(100% + 5px);
     width: 40px;
     height: 40px;
-    background-image: url(../images/Modal__Close_Icon.svg);
-    background-repeat: no-repeat;
-    background-size: contain;
+    transition: 0.3s;
+}
+
+.modal__close:hover{
+    opacity: 0.6;
 }
 
 .modal__form{
