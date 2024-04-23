@@ -39,7 +39,7 @@ const profileModalDescriptionInput = document.querySelector('#modal__description
 const profileEditButtonClose = document.querySelector('#profile-edit-button-close');
 const profileModalSave = profileEditModal.querySelector('.modal__form');
 
-const cardListElement = document.querySelector('.cards__list');
+const cardListElement = document.querySelector('.cards');
 const cardTemplate = document.querySelector('#card-template').content.firstElementChild;
 
 
