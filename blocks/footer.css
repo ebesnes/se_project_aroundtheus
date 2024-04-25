@@ -14,17 +14,11 @@
     line-height: 22px;
 }
 
-@media screen and (max-width: 595px){
+@media screen and (max-width: 630px){
     .footer{
         max-width: 282px;
         margin: 50px auto 30px auto;
         font-size: 14px;
         line-height: 17px;
-    }
-}
-
-@media screen and (max-width: 895px) and (min-width: 596px){
-    .footer{
-        max-width: 580px;
     }
 }

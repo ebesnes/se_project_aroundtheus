@@ -68,6 +68,7 @@
     text-align: center;
     border: none;
     cursor: pointer;
+    width: 100%;
 }
 
 .modal__button:hover{
@@ -89,19 +90,29 @@
 @media screen and (max-width: 630px){
     .modal__container {
         max-width: 282px;
-        height: 322px;
+        max-height: 322px;
         width: 100%;
+        padding: 25px;
     }
 
     .modal__close {
         bottom: calc(100% + 5px);
+        left: calc(100% - 30px);
         width: 26px;
         height: 26px;
+        padding: 0;
+        object-fit: contain;
+        transition: 0.3s;
+    }
+
+    .modal__heading {
+        font-size: 18px;
     }
 
     .modal__button {
         max-width: 238px;
         max-height: 50px;
         border: none;
+        font-size: 14px;
     }
 }
