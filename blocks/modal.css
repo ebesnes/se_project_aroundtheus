@@ -26,7 +26,7 @@
     box-sizing: border-box;
 }
 
-.modal__preview_content{
+.modal__preview_card{
     max-width: 75vw;
     max-height: 75vw;
     position: relative;
@@ -39,6 +39,7 @@
 .modal__preview-opened {
     visibility: visible;
     opacity: 1;
+    transition: opacity 0.5s linear;
   }
 
 .modal__title{
