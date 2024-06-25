@@ -14,12 +14,12 @@
         <header class="header page__section">
             <img
                 src="./images/logo.svg"
-                alt="Around the U.S. logo"
-                class="header__logo"
+                alt="Around the U.S. Logo"
+                class="logo header__logo"
             />
         </header>
-        <main class="content">
 
+        <main class="content">
         <section class="profile page__section">
             <img
             class="profile__image"
@@ -30,43 +30,77 @@
                 <h1 class="profile__title">Jacques Cousteau</h1>
                 <button
                     type="button" 
-                    class="profile__edit-button" 
-                    id="profile-edit-button">
+                    class="profile__edit-button">
                 </button>
+
                 <p class="profile__description">Explorer</p>
             </div>
             <button type="button" class="profile__add-button"></button>
         </section>
 
-        <section class="gallery page__section">
-            <ul class="cards"></ul>
+        <section class="cards page__section">
+            <ul class="cards__list"></ul>
+        
         </section>        
         </main>
         <footer class="footer page__section">
             <p class="footer__copyright">&copy; 2023 Around The U.S.</p>
-        </footer>        
+        </footer>                
     </div>
+
+    <!-- Profile edit modal -->
     <div class="modal" id="profile-edit-modal">
-        <div class="modal__container">
-            <p class="modal__heading">Edit Profile</p>
-            <button class="modal__close" id="profile-edit-button-close"></button>
-            <form class="modal__form">
+        <div class="modal__content">
+            <button class="modal__close" type="button"></button>
+            <p class="modal__title">Edit Profile</p>
+        
+            <form class="modal__form" id="edit-profile-form">
                 <input 
                     type="text"
-                    name="title"
-                    class="modal__input"
+                    name="name"
                     placeholder="Name"
-                    id="modal__title"
-                    >
+                    class="modal__input modal__input_type_name"
+                    />
                 <input 
                     type="text"
                     name="description"
-                    class="modal__input"
                     placeholder="Description"
-                    id="modal__description"
-                    >
-                <button class="modal__button">Save</button>
+                    class="modal__input modal__input_type_description"
+                    />
+                <button class="button modal__button" type="submit">Save</button>
             </form>
+        </div>
+    </div>
+
+    <!-- Add card modal -->
+    <div class="modal" id="add-card-modal">
+        <div class="modal__content">
+            <button class="modal__close" type="button" id="add-card-form"></button>
+            <p class="modal__title">New Place</p>
+            <form class="modal__form" id="add-card-form">
+                <input 
+                    type="text"
+                    name="title"
+                    class="modal__input modal__input_type_title"
+                    placeholder="Tittle"
+                    />
+                <input 
+                    type="text"
+                    name="url"
+                    class="modal__input modal__input_type_url"
+                    placeholder="Image URL"
+                    />
+                <button class="button modal__button" type="submit">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <!--Preview image modal-->
+    <div class="modal" id="preview-image-modal">
+        <div class="modal__content modal__preview_content">
+            <button class="modal__close" type="button" id="preview__close-button"></button>
+            <img class="modal__image" src="" alt=""/>
+            <p class="modal__image-title"></p>
         </div>
     </div>
 
@@ -74,8 +108,9 @@
         <li class="card">
             <img class="card__image" src="" alt=""/>
             <div class="card__description">
-                <h2 class="card__description-text"></h2>
+                <h2 class="card__title"></h2>
                 <button class="card__like-button" type="button"></button>
+                <button class="card__delete-button" type="button"></button>
             </div>
         </li>
     </template>

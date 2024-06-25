@@ -14,7 +14,7 @@
     display: flex;
 }
 
-.modal__container{
+.modal__content{
     position: relative;
     background-color: white;
     margin: auto;
@@ -26,7 +26,22 @@
     box-sizing: border-box;
 }
 
-.modal__heading{
+.modal__preview_content{
+    max-width: 75vw;
+    max-height: 75vw;
+    position: relative;
+    margin: auto;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s ease;
+}
+  
+.modal__preview-opened {
+    visibility: visible;
+    opacity: 1;
+  }
+
+.modal__title{
     font-size: 24px;
     font-weight: 900;
     line-height: 29px;
@@ -101,7 +116,7 @@
         transition: 0.3s;
     }
 
-    .modal__heading {
+    .modal__title {
         font-size: 18px;
     }
 
@@ -114,7 +129,7 @@
 }
 
 @media screen and (max-width: 320px){
-    .modal__container {
+    .modal__content {
         max-width: 282px;
         max-height: 322px;
         padding: 30px;

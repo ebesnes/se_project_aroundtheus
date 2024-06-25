@@ -1,6 +1,7 @@
 .card{
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .card__image{
@@ -19,7 +20,7 @@
     border-radius: 0 0 10px 10px;
 }
 
-.card__description-text{
+.card__title{
     max-width: 220px;
     line-height: 29px;
     text-overflow: ellipsis;
@@ -38,8 +39,21 @@
     border-style: none;
 }
 
+.card__like-button_active {
+    background-image: url(../images/like-button-active.svg);
+}
+
 .card__like-button:hover{
     opacity: 50%;
     cursor: pointer;
 }
 
+.card__delete-button {
+    background: url(../images/Delete\ icon.svg) center no-repeat;
+    width: 18px;
+    height: 19px;
+    border-style: none;
+    position: absolute;
+    top: 15px;
+    right: 10px;
+}
