@@ -35,12 +35,6 @@
     opacity: 0;
     transition: visibility 0s, opacity 0.5s ease;
 }
-  
-.modal__preview-opened {
-    visibility: visible;
-    opacity: 1;
-    transition: opacity 0.5s linear;
-  }
 
 .modal__title{
     font-size: 24px;

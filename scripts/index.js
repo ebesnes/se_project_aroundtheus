@@ -44,7 +44,7 @@ const addCardModalCloseButton = addCardModal.querySelector('.modal__close');
 const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
 const addNewCardButton = document.querySelector('.profile__add-button');
-const previewCloseButton= document.querySelector('.modal__close-preview-button');
+const previewCloseButton= previewImageModal.querySelector('.modal__close');
 const previewCardTitle = document.querySelector('.modal__preview-title');
 const previewImage = document.querySelector('.modal__preview-image');
 
@@ -122,7 +122,9 @@ profileEditButton.addEventListener('click', () => {
     jobInput.value = profileDescription.textContent;
     openModal(editProfileModal);
 });
+
 profileModalCloseButton.addEventListener('click', () => closeModal(editProfileModal));
+previewCloseButton.addEventListener('click', () => closeModal(previewImageModal));
 
 //add new card
 addNewCardButton.addEventListener('click', () => openModal(addCardModal));
