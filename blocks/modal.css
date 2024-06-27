@@ -8,6 +8,7 @@
     background-color: rgba(0, 0, 0, .5);
     padding: 0 19px;
     display: none;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
 .modal_opened{
@@ -33,7 +34,7 @@
     margin: auto;
     visibility: hidden;
     opacity: 0;
-    transition: visibility 0s, opacity 0.5s ease;
+    transition: visibility 0.5s, opacity 0.5s ease;
 }
 
 .modal__title{
@@ -56,7 +57,6 @@
     left: calc(100% + 5px);
     width: 40px;
     height: 40px;
-    transition: 0.3s;
 }
 
 .modal__close:hover{
@@ -84,7 +84,7 @@
 }
 
 .modal__button:hover{
-    opacity: 80%;
+    opacity: 0.8;
 }
 
 .modal__input{
@@ -108,7 +108,6 @@
         height: 26px;
         padding: 0;
         background-size: contain;
-        transition: 0.3s;
     }
 
     .modal__title {
@@ -116,7 +115,7 @@
     }
 
     .modal__button {
-        max-width: 238px 100%;
+        max-width: 238px;
         max-height: 50px;
         border: none;
         font-size: 14px;
