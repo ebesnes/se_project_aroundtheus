@@ -8,7 +8,7 @@
     background-color: rgba(0, 0, 0, .5);
     padding: 0 19px;
     display: none;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
+    transition: 500ms linear;
 }
 
 .modal_opened{
@@ -27,15 +27,31 @@
     box-sizing: border-box;
 }
 
-.modal__preview_card{
-    max-width: 75vw;
-    max-height: 75vw;
-    position: relative;
-    margin: auto;
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0.5s, opacity 0.5s ease;
+.modal__content-preview{
+    background: transparent;
+    padding: 0;
 }
+
+.modal__preview-image{
+    max-width: 75vw;
+    max-height: 75vh;
+    max-width: 100%;
+}
+
+.modal__preview-title{
+    margin: 10px 0 0;
+}
+
+
+/* .modal-content, #animation {  
+    animation-name: fade;
+    animation-duration: 0.6s;
+  }
+  
+  @keyframes fade {
+    from {transform: fade(0.1)} 
+    to {transform: scale(1)}
+  } */
 
 .modal__title{
     font-size: 24px;
@@ -127,5 +143,17 @@
         max-width: 282px;
         max-height: 322px;
         padding: 30px;
+    }
+
+    .modal__preview-close{
+        width: 30px;
+        height: 30px;
+        left: 90%;
+        bottom: 90%;
+    }
+
+    .modal__preview-title{
+        font-size: 12px;
+        margin: 0;
     }
 }
