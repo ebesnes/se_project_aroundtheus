@@ -40,10 +40,10 @@
     <div class="modal modal__opened" id="profile-edit-modal">
         <div class="modal__content">
             <button class="modal__close" type="button"></button>
-            <p class="modal__title">Edit Profile</p>
+            <h1 class="modal__title">Edit Profile</h1>
             <form class="modal__form" id="edit-profile-form">
-                <input type="text" name="name" placeholder="Name" class="modal__input modal__input_type_name">
-                <input type="text" name="description" placeholder="Description" class="modal__input modal__input_type_description">
+                <input type="text" name="name" placeholder="Name" class="modal__input modal__input_type_name" required>
+                <input type="text" name="description" placeholder="Description" class="modal__input modal__input_type_description" required>
                 <button class="button modal__button" type="submit">Save</button>
             </form>
         </div>
@@ -53,10 +53,10 @@
     <div class="modal" id="add-card-modal">
         <div class="modal__content">
             <button class="modal__close" type="button"></button>
-            <p class="modal__title">New Place</p>
+            <h1 class="modal__title">New Place</h1>
             <form class="modal__form" id="add-card-form">
-                <input type="text" name="title" class="modal__input modal__input_type_title" placeholder="Title">
-                <input type="text" name="url" class="modal__input modal__input_type_url" placeholder="Image URL">
+                <input type="text" name="title" class="modal__input modal__input_type_title" placeholder="Title" required>
+                <input type="url" name="url" class="modal__input modal__input_type_url" placeholder="Image URL" required>
                 <button class="button modal__button" type="submit">Save</button>
             </form>
         </div>
@@ -67,7 +67,7 @@
         <div class="modal__content modal__content-preview">
             <button class="modal__close modal__preview-close" type="button"></button>
             <img class="modal__preview-image" src="" alt="Preview Image">
-            <p class="modal__preview-title"></p>
+            <h2 class="modal__preview-title"></h2>
         </div>
     </div>
 
@@ -82,6 +82,6 @@
         </li>
     </template>
 
-    <script src="./scripts/index.js"></script>
+    <script defer src="./scripts/index.js"></script>
 </body>
 </html>
