@@ -56,10 +56,12 @@ const cardUrlInput = addCardFormElement.querySelector('.modal__input_type_url');
 // Functions
 function closeModal(modal) {
     modal.classList.remove('modal_opened');
+    document.addEventListener('keyup', handleEsc);
 }
 
 function openModal(modal) {
     modal.classList.add('modal_opened');
+    document.addEventListener('keyup', handleEsc);
 }
 
 function renderCard(cardData, wrapper) {
@@ -111,6 +113,11 @@ function handleAddCardSubmit(ev) {
     closeModal(addCardModal);
 }
 
+const handleEsc = (evt) => {
+    evt.preventDefault();
+    isEscEvent(evt, closeModal);
+}
+
 // Event Listeners
 profileFormElement.addEventListener('submit', handleProfileFormSubmit);
 addCardFormElement.addEventListener('submit', handleAddCardSubmit);
@@ -120,6 +127,13 @@ profileEditButton.addEventListener('click', () => {
     jobInput.value = profileDescription.textContent;
     openModal(editProfileModal);
 });
+
+const isEscEvent = (evt, action) => {
+    const activeModal = document.querySelector('.modal__opened');
+    if (evt.key === "Escape") {
+        action(activeModal)
+    }
+}
 
 profileModalCloseButton.addEventListener('click', () => closeModal(editProfileModal));
 previewCloseButton.addEventListener('click', () => closeModal(previewImageModal));

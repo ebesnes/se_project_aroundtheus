@@ -96,6 +96,13 @@
     width: 100%;
 }
 
+.modal__button_disabled{
+    background: transparent;
+    opacity: 0.2;
+    color: #000;
+    border: 1px solid #000;
+}
+
 .modal__button:hover{
     opacity: 0.8;
 }
@@ -110,6 +117,20 @@
     font-weight: 400;
     height: 27px;
     width: 100%;
+}
+
+.modal__input_type_error{
+    border-bottom: #ff0000;
+    margin-bottom: 5px;
+}
+
+.modal__error_visible{
+    color: rgba(255, 0, 0, 1);
+    font-size: 12px;
+    line-height: 1.2;
+    margin-bottom: 5px;
+    visibility: visible;
+    min-height: 12px;
 }
 
 @media screen and (max-width: 630px){

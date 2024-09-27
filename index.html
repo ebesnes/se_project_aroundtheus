@@ -42,8 +42,29 @@
             <button class="modal__close" type="button"></button>
             <h2 class="modal__title">Edit Profile</h2>
             <form class="modal__form" id="edit-profile-form">
-                <input type="text" name="name" placeholder="Name" class="modal__input modal__input_type_name" required>
-                <input type="text" name="description" placeholder="Description" class="modal__input modal__input_type_description" required>
+                <input 
+                    type="text" 
+                    name="name" 
+                    placeholder="Name" 
+                    class="modal__input modal__input_type_name"
+                    id="owner-name"
+                    minlength="2"
+                    maxlength="40"
+                    required
+                    />
+                    <span class="modal__error" id="owner-name-error"></span>
+                <input 
+                    type="text" 
+                    name="description" 
+                    placeholder="Description" 
+                    class="modal__input modal__input_type_description"
+                    id="owner-description"
+                    minlength="2"
+                    maxlength="200"
+                    required
+                    />
+                    <span class="modal__error" id="owner-description-error"></span>
+
                 <button class="button modal__button" type="submit">Save</button>
             </form>
         </div>
@@ -55,9 +76,21 @@
             <button class="modal__close" type="button"></button>
             <h2 class="modal__title">New Place</h2>
             <form class="modal__form" id="add-card-form">
-                <input type="text" name="title" class="modal__input modal__input_type_title" placeholder="Title" required>
+                <input 
+                    type="text" 
+                    name="title" 
+                    class="modal__input modal__input_type_title" 
+                    placeholder="Title"
+                    id="card-description"
+                    minlength="1"
+                    maxlength="30"
+                    required
+                    />
+
+                    <span class="modal__error" id="card-description-error"></span>
+
                 <input type="url" name="url" class="modal__input modal__input_type_url" placeholder="Image URL" required>
-                <button class="button modal__button" type="submit">Save</button>
+                <button class="button modal__button modal__button_disabled" type="submit" disabled>Save</button>
             </form>
         </div>
     </div>
@@ -83,5 +116,6 @@
     </template>
 
     <script defer src="./scripts/index.js"></script>
+    <script defer src="./scripts/validate.js"></script>
 </body>
 </html>
