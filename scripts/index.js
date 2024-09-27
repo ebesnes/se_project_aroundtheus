@@ -96,6 +96,22 @@ function getCardElement(data) {
     return cardElement;
 }
 
+function handleEsc(evt) {
+    if(evt.key === "Escape") {
+        const activeModal = document.querySelector('.modal_opened');
+        if (activeModal) {
+            closeModal(activeModal);
+        }
+    }
+}
+
+function handleOutsideClick(evt) {
+    const activeModal = document.querySelector('.modal_opened');
+    if (activeModal && evt.target === activeModal) {
+        closeModal(activeModal);
+    }
+}
+
 // Event Handlers
 function handleProfileFormSubmit(ev) {
     ev.preventDefault();
@@ -113,10 +129,6 @@ function handleAddCardSubmit(ev) {
     closeModal(addCardModal);
 }
 
-const handleEsc = (evt) => {
-    evt.preventDefault();
-    isEscEvent(evt, closeModal);
-}
 
 // Event Listeners
 profileFormElement.addEventListener('submit', handleProfileFormSubmit);
@@ -128,17 +140,13 @@ profileEditButton.addEventListener('click', () => {
     openModal(editProfileModal);
 });
 
-const isEscEvent = (evt, action) => {
-    const activeModal = document.querySelector('.modal__opened');
-    if (evt.key === "Escape") {
-        action(activeModal)
-    }
-}
-
 profileModalCloseButton.addEventListener('click', () => closeModal(editProfileModal));
 previewCloseButton.addEventListener('click', () => closeModal(previewImageModal));
 
 addNewCardButton.addEventListener('click', () => openModal(addCardModal));
 addCardModalCloseButton.addEventListener('click', () => closeModal(addCardModal));
+
+document.addEventListener('keyup', handleEsc);
+document.addEventListener('mousedown', handleOutsideClick);
 
 initialCards.forEach((cardData) => renderCard(cardData, cardsWrap));
