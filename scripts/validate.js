@@ -1,3 +1,11 @@
+function checkInputValidity(formEl, inputEl, choices) {
+    if (!inputEl.validity.valid) {
+            showInputError(formEl, inputEl, choices);
+        } else {
+            hideInputError(formEl, inputEl, choices);
+        }
+}
+
 function showInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
     const errorMessageEl = formEl.querySelector(`#${inputEl.id}-error`);
     inputEl.classList.add(inputErrorClass);
@@ -10,28 +18,6 @@ function hideInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
     inputEl.classList.remove(inputErrorClass);
     errorMessageEl.textContent = '';
     errorMessageEl.classList.remove(errorClass);
-}
-
-function checkInputValidity(formEl, inputEl, choices) {
-    if (inputEl.type === 'url') {
-        if (!inputEl.validity.valid) {
-            return showInputError(formEl, inputEl, choices);
-        } else {
-            inputEl.setCustomValidity("");
-        }
-    } else if (inputEl.type === 'text') {
-        if (inputEl.validity.valueMissing) {
-            return showInputError(formEl, inputEl, choices);
-        } else {
-            inputEl.setCustomValidity("");
-        }
-    }
-    
-        if(!inputEl.validity.valid) {
-            return showInputError(formEl, inputEl, choices);
-        }
-
-    hideInputError(formEl, inputEl, choices);
 }
 
 function hasInvalidInput(inputList){
@@ -60,10 +46,11 @@ function setEventListeners(formEl, choices) {
     const { inputSelector } = choices;
     const inputEls = [...formEl.querySelectorAll(inputSelector)];
     const submitButton = formEl.querySelector('.modal__button');
+
     inputEls.forEach((inputEl) => {
-        inputEl.addEventListener('input', (e) => {
+        inputEl.addEventListener('input', () => {
             checkInputValidity(formEl, inputEl, choices);
-            toggleButtonState(inputEls, submitButton, choices)
+            toggleButtonState(inputEls, submitButton, choices);
         });
     });
 }
