@@ -54,15 +54,39 @@ const cardTitleInput = addCardFormElement.querySelector('.modal__input_type_titl
 const cardUrlInput = addCardFormElement.querySelector('.modal__input_type_url');
 
 // Functions
-function closeModal(modal) {
-    modal.classList.remove('modal_opened');
-    document.addEventListener('keyup', handleEsc);
-}
+
+let activeModal = null;
 
 function openModal(modal) {
     modal.classList.add('modal_opened');
+    activeModal = modal;
+    document.addEventListener('mousedown', handleOutsideClick);
     document.addEventListener('keyup', handleEsc);
 }
+
+function closeModal(modal) {
+    modal.classList.remove('modal_opened');
+
+    if (modal === addCardModal){
+        addCardFormElement.reset();
+    }
+    activeModal = null;
+    document.removeEventListener('mousedown', handleOutsideClick);
+    document.removeEventListener('keyup', handleEsc);
+}
+
+function handleEsc(evt) {
+    if(evt.key === "Escape" && activeModal) {
+        closeModal(activeModal);
+        }
+    }
+
+function handleOutsideClick(evt) {
+    if (activeModal && evt.target === activeModal) {
+        closeModal(activeModal);
+    }
+}
+
 
 function renderCard(cardData, wrapper) {
     const cardElement = getCardElement(cardData);
@@ -94,22 +118,6 @@ function getCardElement(data) {
     cardTitle.textContent = data.name;
 
     return cardElement;
-}
-
-function handleEsc(evt) {
-    if(evt.key === "Escape") {
-        const activeModal = document.querySelector('.modal_opened');
-        if (activeModal) {
-            closeModal(activeModal);
-        }
-    }
-}
-
-function handleOutsideClick(evt) {
-    const activeModal = document.querySelector('.modal_opened');
-    if (activeModal && evt.target === activeModal) {
-        closeModal(activeModal);
-    }
 }
 
 // Event Handlers
@@ -145,8 +153,5 @@ previewCloseButton.addEventListener('click', () => closeModal(previewImageModal)
 
 addNewCardButton.addEventListener('click', () => openModal(addCardModal));
 addCardModalCloseButton.addEventListener('click', () => closeModal(addCardModal));
-
-document.addEventListener('keyup', handleEsc);
-document.addEventListener('mousedown', handleOutsideClick);
 
 initialCards.forEach((cardData) => renderCard(cardData, cardsWrap));
