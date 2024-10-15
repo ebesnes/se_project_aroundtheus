@@ -66,10 +66,6 @@ function openModal(modal) {
 
 function closeModal(modal) {
     modal.classList.remove('modal_opened');
-
-    if (modal === addCardModal){
-        addCardFormElement.reset();
-    }
     activeModal = null;
     document.removeEventListener('mousedown', handleOutsideClick);
     document.removeEventListener('keyup', handleEsc);
