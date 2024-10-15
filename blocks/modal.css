@@ -56,7 +56,7 @@
     color: black;
     text-align: left;
     padding: 0;
-    margin: 0 0 50px 0;
+    margin: 0 0 30px 0;
 }
 
 .modal__close{
@@ -111,26 +111,32 @@
     border: none;
     border-bottom: 1px solid rgba(0, 0, 0, .2);
     color: rgba(0, 0, 0, 1);
-    margin: 0 0 30px 0;
+    margin: 20px 0 5px 0;
     padding: 0;
     font-size: 14px;
     font-weight: 400;
     height: 27px;
     width: 100%;
+    box-sizing: border-box;
 }
 
-.modal__input_type_error{
-    border-bottom: #ff0000;
-    margin-bottom: 5px;
+
+.modal__error {
+    min-height: 17px;
+    max-height: 17px;
+    font-size: 12px;
+    line-height: 1.2;
+    visibility: hidden;
+    color:#ff0000;
 }
 
 .modal__error_visible{
-    color: rgba(255, 0, 0, 1);
-    font-size: 12px;
-    line-height: 1.2;
-    margin-bottom: 5px;
     visibility: visible;
-    min-height: 12px;
+}
+
+.modal__input_type_error{
+    border-bottom: 1px solid #ff0000;
+    margin-bottom: 5px;
 }
 
 @media screen and (max-width: 630px){
