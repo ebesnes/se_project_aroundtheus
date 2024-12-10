@@ -1,3 +1,7 @@
+import FormValidator from '../components/FormValidator.js';
+import Card from '../components/Card.js';
+
+const cardsWrap = document.querySelector('.cards__list');
 const initialCards = [
     {
         name: "Yosemite Valley",
@@ -25,98 +29,82 @@ const initialCards = [
     }, 
 ];
 
-const cardTemplate = document.querySelector('#card-template')
-.content.querySelector('.card');
+// Modal elements
+const previewImageModal = document.querySelector('#modal__preview-card');
+const previewImage = previewImageModal.querySelector('.modal__preview-image');
+const previewCardTitle = previewImageModal.querySelector('.modal__preview-title');
 
-// Define elements
-const cardsWrap = document.querySelector('.cards__list');
 const editProfileModal = document.querySelector('#profile-edit-modal');
 const addCardModal = document.querySelector('#add-card-modal');
 const profileFormElement = editProfileModal.querySelector('.modal__form');
 const addCardFormElement = addCardModal.querySelector('.modal__form');
-const previewImageModal = document.querySelector('#modal__preview-card');
 
-// Buttons & nodes
-const profileEditButton = document.querySelector('.profile__edit-button');
-const profileModalCloseButton = editProfileModal.querySelector('.modal__close');
-const addCardModalCloseButton = addCardModal.querySelector('.modal__close');
 const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
-const addNewCardButton = document.querySelector('.profile__add-button');
-const previewCloseButton = previewImageModal.querySelector('.modal__close');
-const previewCardTitle = document.querySelector('.modal__preview-title');
-const previewImage = document.querySelector('.modal__preview-image');
 
-// Form data
+// Modal control buttons
+const profileEditButton = document.querySelector('.profile__edit-button');
+const addNewCardButton = document.querySelector('.profile__add-button');
+const profileModalCloseButton = editProfileModal.querySelector('.modal__close');
+const addCardModalCloseButton = addCardModal.querySelector('.modal__close');
+const previewCloseButton = previewImageModal.querySelector('.modal__close');
+
+// Input elements
 const nameInput = profileFormElement.querySelector('.modal__input_type_name');
 const jobInput = profileFormElement.querySelector('.modal__input_type_description');
 const cardTitleInput = addCardFormElement.querySelector('.modal__input_type_title');
 const cardUrlInput = addCardFormElement.querySelector('.modal__input_type_url');
 
-// Functions
-
-let activeModal = null;
-
+// Modal functions
 function openModal(modal) {
     modal.classList.add('modal_opened');
-    activeModal = modal;
     document.addEventListener('mousedown', handleOutsideClick);
     document.addEventListener('keyup', handleEsc);
 }
 
 function closeModal(modal) {
     modal.classList.remove('modal_opened');
-    activeModal = null;
     document.removeEventListener('mousedown', handleOutsideClick);
     document.removeEventListener('keyup', handleEsc);
 }
 
 function handleEsc(evt) {
-    if(evt.key === "Escape" && activeModal) {
-        closeModal(activeModal);
-        }
+    if (evt.key === "Escape") {
+      closeModal(document.querySelector('.modal_opened'));
     }
-
-function handleOutsideClick(evt) {
-    if (activeModal && evt.target === activeModal) {
-        closeModal(activeModal);
+  }
+  
+  function handleOutsideClick(evt) {
+    if (evt.target.classList.contains('modal_opened')) {
+      closeModal(evt.target);
     }
+  }
+
+//Card preview function
+function handleImageClick (name, link) {
+    previewImage.src = link;
+    previewImage.alt = name;
+    previewCardTitle.textContent = name;
+
+    openModal(previewImageModal);
 }
 
+const validationConfig = {
+    formSelector: ".modal__form",
+    inputSelector: ".modal__input",
+    submitButtonSelector: ".modal__button",
+    inactiveButtonClass: "modal__button_disabled",
+    inputErrorClass: "modal__input_type_error",
+    errorClass: "modal__error_visible"
+};
 
-function renderCard(cardData, wrapper) {
-    const cardElement = getCardElement(cardData);
-    wrapper.prepend(cardElement);
-}
+const profileFormValidator = new FormValidator(validationConfig, profileFormElement);
+profileFormValidator.enableValidation();
 
-function getCardElement(data) {
-    const cardElement = cardTemplate.cloneNode(true);
-    const cardImage = cardElement.querySelector('.card__image');
-    const cardTitle = cardElement.querySelector('.card__title');
-    const likeButton = cardElement.querySelector('.card__like-button');
-    const deleteCardButton = cardElement.querySelector('.card__delete-button');
+const addCardFormValidator = new FormValidator(validationConfig, addCardFormElement);
+addCardFormValidator.enableValidation();
 
-    deleteCardButton.addEventListener('click', () => cardElement.remove());
-
-    cardImage.addEventListener('click', () => {
-        previewImage.src = data.link;
-        previewCardTitle.textContent = data.name;
-        previewImage.alt = data.name;
-        openModal(previewImageModal);
-    });
-
-    likeButton.addEventListener('click', () => {
-        likeButton.classList.toggle('card__like-button_active');
-    });
-
-    cardImage.src = data.link;
-    cardImage.alt = data.name;
-    cardTitle.textContent = data.name;
-
-    return cardElement;
-}
-
-// Event Handlers
+//Profile submission
 function handleProfileFormSubmit(ev) {
     ev.preventDefault();
     profileTitle.textContent = nameInput.value;
@@ -124,30 +112,33 @@ function handleProfileFormSubmit(ev) {
     closeModal(editProfileModal);
 }
 
+//Add card submission
 function handleAddCardSubmit(ev) {
     ev.preventDefault();
-    const name = cardTitleInput.value;
-    const link = cardUrlInput.value;
-    renderCard({ name, link }, cardsWrap);
+    const cardData = { name: cardTitleInput.value, link: cardUrlInput.value };
+    const card = new Card(cardData, '#card-template', handleImageClick);
+    cardsWrap.prepend(card.getView());
     addCardFormElement.reset();
     closeModal(addCardModal);
 }
 
 
-// Event Listeners
-profileFormElement.addEventListener('submit', handleProfileFormSubmit);
-addCardFormElement.addEventListener('submit', handleAddCardSubmit);
-
+//Modal event listeners
 profileEditButton.addEventListener('click', () => {
     nameInput.value = profileTitle.textContent;
     jobInput.value = profileDescription.textContent;
     openModal(editProfileModal);
 });
 
+addNewCardButton.addEventListener('click', () => openModal(addCardModal));
+addCardModalCloseButton.addEventListener('click', () => closeModal(addCardModal));
 profileModalCloseButton.addEventListener('click', () => closeModal(editProfileModal));
 previewCloseButton.addEventListener('click', () => closeModal(previewImageModal));
 
-addNewCardButton.addEventListener('click', () => openModal(addCardModal));
-addCardModalCloseButton.addEventListener('click', () => closeModal(addCardModal));
+profileFormElement.addEventListener('submit', handleProfileFormSubmit);
+addCardFormElement.addEventListener('submit', handleAddCardSubmit);
 
-initialCards.forEach((cardData) => renderCard(cardData, cardsWrap));
+initialCards.forEach((data) => {
+    const card = new Card(data, "#card-template", handleImageClick);
+    cardsWrap.prepend(card.getView());
+});
