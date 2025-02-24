@@ -7,17 +7,16 @@
     <meta name="description" content="Around the U.S.">
     <meta name="author" content="Steve Sensebe">
     <meta name="keywords" content="travel, outdoors, cousteau">
-    <link href="./pages/index.css" rel="stylesheet">
 </head>
 <body class="page">
     <div class="page__content">
         <header class="header page__section">
-            <img src="./images/logo.svg" alt="Around the U.S. Logo" class="logo header__logo">
+            <img src="<%=require('./images/logo.svg')%>" alt="Around the U.S. Logo" class="logo header__logo">
         </header>
 
         <main class="content">
             <section class="profile page__section">
-                <img class="profile__image" src="./images/jacques-cousteau.jpg" alt="avatar">
+                <img class="profile__image" src="<%=require('./images/jacques-cousteau.jpg')%>" alt="avatar">
                 <div class="profile__info">
                     <h1 class="profile__title">Jacques Cousteau</h1>
                     <button type="button" class="profile__edit-button"></button>
@@ -125,6 +124,5 @@
         </li>
     </template>
 
-    <script defer src="./pages/index.js" type="module"></script>
 </body>
 </html>
