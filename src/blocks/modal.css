@@ -61,7 +61,7 @@
 
 .modal__close{
     border: none;
-    background: transparent url(../images/Modal__Close_Icon.svg) no-repeat;
+    background: transparent url(../images/Close_Icon.png) no-repeat;
     cursor: pointer;
     position: absolute;
     bottom: calc(100% + 5px);
