@@ -20,17 +20,28 @@
 
       <main class="content">
         <section class="profile page__section">
-          <img
-            class="profile__image"
-            src="<%=require('./images/jacques-cousteau.jpg')%>"
-            alt="avatar"
-          />
+          <div class="profile__container">
+            <img
+              class="profile__image"
+              src="<%=require('./images/jacques-cousteau.jpg')%>"
+              alt="avatar profile picture"
+            />
+            <button class="profile__image-edit" type="button"></button>
+          </div>
           <div class="profile__info">
             <h1 class="profile__title">Jacques Cousteau</h1>
-            <button type="button" class="profile__edit-button"></button>
+            <button
+              type="button"
+              class="profile__edit-button"
+              id="profile-edit-button"
+            ></button>
             <p class="profile__description">Explorer</p>
           </div>
-          <button type="button" class="profile__add-button"></button>
+          <button
+            type="button"
+            class="profile__add-button"
+            id="profile-add-button"
+          ></button>
         </section>
 
         <section class="cards page__section">
@@ -39,16 +50,21 @@
       </main>
 
       <footer class="footer page__section">
-        <p class="footer__copyright">&copy; 2023 Around The U.S.</p>
+        <p class="footer__copyright">&copy; 2025 Around The U.S.</p>
       </footer>
     </div>
 
     <!-- Profile edit modal -->
-    <div class="modal" id="profile-edit-modal">
+    <div class="modal" id="edit-profile-form">
       <div class="modal__content">
-        <button class="modal__close" type="button"></button>
+        <button
+          class="modal__close"
+          type="button"
+          id="modal-close-button"
+        ></button>
+
         <h2 class="modal__title">Edit Profile</h2>
-        <form class="modal__form" id="edit-profile-form">
+        <form class="modal__form">
           <input
             type="text"
             name="name"
@@ -63,8 +79,8 @@
           <input
             type="text"
             name="description"
+            class="modal__input"
             placeholder="Description"
-            class="modal__input modal__input_type_description"
             id="owner-description"
             minlength="2"
             maxlength="200"
@@ -80,7 +96,11 @@
     <!-- Add card modal -->
     <div class="modal" id="add-card-modal">
       <div class="modal__content">
-        <button class="modal__close" type="button"></button>
+        <button
+          class="modal__close"
+          type="button"
+          id="modal-close-button"
+        ></button>
         <h2 class="modal__title">New Place</h2>
         <form class="modal__form" id="add-card-form">
           <input
@@ -108,12 +128,23 @@
           <span class="modal__error" id="card-url-error"></span>
 
           <button
-            class="button modal__button modal__button_disabled"
+            class="modal__button modal__button_disabled"
             type="submit"
             disabled
           >
             Save
           </button>
+        </form>
+      </div>
+    </div>
+
+    <!--Card delete confirmation-->
+    <div class="modal" id="confirm-modal-delete">
+      <div class="modal__content">
+        <button class="modal__close" id="modal-close-button"></button>
+        <h2 class="modal__title" id="confirm-title">Are you sure?</h2>
+        <form class="modal__form" id="confirm-form">
+          <button class="modal__button" id="confirm-button">Yes</button>
         </form>
       </div>
     </div>
@@ -124,6 +155,28 @@
         <button class="modal__close" type="button"></button>
         <img class="modal__preview-image" src="" alt="Preview Image" />
         <h2 class="modal__preview-title"></h2>
+      </div>
+    </div>
+
+    <!--Change avatar modal-->
+    <div class="modal" id="change-avatar-modal">
+      <div class="modal__content">
+        <button class="modal__close" id="modal-close-button"></button>
+        <h2 class="modal__title">Change profile picture</h2>
+        <form class="modal__form" id="change-avatar-form">
+          <input
+            type="url"
+            name="url"
+            class="modal__input modal__input_type_url"
+            placeholder="Image URL"
+            id="avatar-input-url"
+            required
+          />
+          <span class="modal__error" id="avatar-input-url-error"></span>
+          <button class="modal__button modal__button_disabled" disabled>
+            Save
+          </button>
+        </form>
       </div>
     </div>
 

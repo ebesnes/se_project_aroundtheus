@@ -31,6 +31,8 @@ export const selectors = {
   previewModal: "#modal__preview-card",
   editProfileModal: "#profile-edit-modal",
   addCardModal: "#add-card-modal",
+  changeAvatarModal: "#change-avatar-modal",
+  confirmModal: "#confirm-modal-delete",
 };
 
 export const validationConfig = {
