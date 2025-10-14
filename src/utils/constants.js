@@ -29,7 +29,7 @@ export const selectors = {
   cardSection: ".cards__list",
   cardTemplate: "#card-template",
   previewModal: "#modal__preview-card",
-  editProfileModal: "#profile-edit-modal",
+  profileEditModal: "#edit-profile-modal",
   addCardModal: "#add-card-modal",
   changeAvatarModal: "#change-avatar-modal",
   confirmModal: "#confirm-modal-delete",

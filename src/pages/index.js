@@ -91,13 +91,6 @@ const changeAvatarPopup = new PopupWithForm(
 );
 changeAvatarPopup.setEventListeners();
 
-document
-  .querySelector(".profile__avatar-edit-button")
-  .addEventListener("click", () => {
-    changeAvatarFormValidator.resetValidation();
-    changeAvatarPopup.open();
-  });
-
 //Init form validation
 const editFormValidator = new FormValidator(
   validationConfig,
@@ -141,21 +134,19 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
 //Create card
 function createCard(data) {
   const card = new Card(
-    {
-      data,
-      handleImageClick: (imgData) => cardPreviewPopup.open(imgData),
-      handleDeleteCard: (cardID, cardElement) => {
-        confirmPopup.setSubmitAction(() => {
-          api
-            .deleteCard(cardID)
-            .then(() => {
-              cardElement.remove();
-              confirmPopup.close();
-            })
-            .catch((err) => console.error("Failed to delete card:", err));
-        });
-        confirmPopup.open();
-      },
+    data,
+    (imgData) => cardPreviewPopup.open(imgData),
+    (cardID, cardElement) => {
+      confirmPopup.setSubmitAction(() => {
+        api
+          .deleteCard(cardID)
+          .then(() => {
+            cardElement.remove();
+            confirmPopup.close();
+          })
+          .catch((err) => console.error("Failed to delete card:", err));
+      });
+      confirmPopup.open();
     },
     selectors.cardTemplate
   );
