@@ -131,23 +131,41 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
   })
   .catch((err) => console.error("Failed to load initial data:", err));
 
+function handleImageClick(imgData) {
+  cardPreviewPopup.open(imgData);
+}
+
+function handleDeleteCard(cardID, cardElement) {
+  confirmPopup.setSubmitAction(() => {
+    api
+      .deleteCard(cardID)
+      .then(() => {
+        cardElement.remove();
+        confirmPopup.close();
+      })
+      .catch((err) => console.error("Failed to delete card:", err));
+    confirmPopup.close();
+  });
+}
+
+function handleLikeCard(cardID, cardInstance) {
+  const isLiked = cardInstance.isLiked();
+  const apiCall = isLiked ? api.removeLike(cardID) : api.addLike(cardID);
+
+  apiCall
+    .then((updatedCard) => {
+      cardInstance.updateLikes(updatedCard.likes);
+    })
+    .catch((err) => console.error("Failed to toggle like:", err));
+}
+
 //Create card
 function createCard(data) {
   const card = new Card(
     data,
-    (imgData) => cardPreviewPopup.open(imgData),
-    (cardID, cardElement) => {
-      confirmPopup.setSubmitAction(() => {
-        api
-          .deleteCard(cardID)
-          .then(() => {
-            cardElement.remove();
-            confirmPopup.close();
-          })
-          .catch((err) => console.error("Failed to delete card:", err));
-      });
-      confirmPopup.open();
-    },
+    handleImageClick,
+    handleDeleteCard,
+    handleLikeCard,
     selectors.cardTemplate
   );
   return card.getView();
