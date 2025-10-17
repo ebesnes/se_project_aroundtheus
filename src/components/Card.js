@@ -39,6 +39,12 @@ export default class Card {
       this._handleImageClick({ name: this._name, link: this._link });
     });
 
+    if (!this._id) {
+      this._likeButton.disabled = true;
+      this._deleteButton.hidden = true;
+      return;
+    }
+
     this._likeButton.addEventListener("click", () => {
       this._handleLikeCard(this._id, this);
     });

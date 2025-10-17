@@ -11,8 +11,13 @@ export default class PopupWithImage extends Popup {
     );
   }
 
-  open({ url, name }) {
-    this._previewImage.src = url;
+  open({ url, link, name }) {
+    const imageLink = link || url;
+    if (!imageLink) {
+      console.error("PopupWithImage: missing image link", { url, link });
+      return;
+    }
+    this._previewImage.src = imageLink;
     this._previewImage.alt = `Image ${name}`;
     this._previewCardTitle.textContent = name;
     super.open();

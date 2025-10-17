@@ -24,7 +24,12 @@ const userInfo = new UserInfo({
   avatarElement: ".profile__image",
 });
 
-let section;
+const section = new Section(
+  {
+    renderer: (item) => createCard(item),
+  },
+  selectors.cardSection
+);
 
 //Init popups
 const cardPreviewPopup = new PopupWithImage(selectors.previewModal);
@@ -75,9 +80,7 @@ const changeAvatarPopup = new PopupWithForm(
   selectors.changeAvatarModal,
   (formData) => {
     api
-      .updateUserAvatar({
-        avatar: formData.url,
-      })
+      .updateUserAvatar(formData.url)
       .then((userData) => {
         userInfo.setUserInfo({
           name: userData.name,
@@ -117,19 +120,17 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
       avatar: userData.avatar,
     });
 
-    section = new Section(
-      {
-        items: cards,
-        renderer: (item) => {
-          const cardEl = createCard(item);
-          section.addItem(cardEl);
-        },
-      },
-      selectors.cardSection
-    );
-    section.renderItems();
+    if (Array.isArray(cards) && cards.length > 0) {
+      section.renderItems(cards);
+    } else {
+      console.warn("Card list is empty.");
+      section.renderItems([]);
+    }
   })
-  .catch((err) => console.error("Failed to load initial data:", err));
+  .catch((err) => {
+    console.error("Failed to load initial data:", err);
+    section.renderItems([]);
+  });
 
 function handleImageClick(imgData) {
   cardPreviewPopup.open(imgData);
@@ -187,3 +188,16 @@ document.querySelector(".profile__add-button").addEventListener("click", () => {
   cardFormValidator.resetValidation();
   addCardPopup.open();
 });
+
+const avatarEditButton = document.querySelector(".profile__image-edit");
+if (avatarEditButton) {
+  avatarEditButton.addEventListener("click", () => {
+    const avatarInput = document.querySelector("#avatar-input-url");
+    const { avatar } = userInfo.getUserInfo();
+    if (avatarInput) {
+      avatarInput.value = avatar || "";
+    }
+    changeAvatarFormValidator.resetValidation();
+    changeAvatarPopup.open();
+  });
+}

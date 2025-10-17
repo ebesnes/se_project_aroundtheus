@@ -12,11 +12,24 @@ export default class Api {
     return Promise.reject(`Error: ${res.status}`);
   }
 
+  _extractData(payload) {
+    if (
+      payload &&
+      typeof payload === "object" &&
+      Object.prototype.hasOwnProperty.call(payload, "data")
+    ) {
+      return payload.data;
+    }
+    return payload;
+  }
+
   //CARD
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
-    }).then(this._handleServerResponse);
+    })
+      .then((res) => this._handleServerResponse(res))
+      .then((data) => this._extractData(data));
   }
   //Add new card to server
   addCard(cardData) {
@@ -24,21 +37,34 @@ export default class Api {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify(cardData),
-    }).then(this._handleServerResponse);
+    })
+      .then((res) => this._handleServerResponse(res))
+      .then((data) => this._extractData(data));
   }
   //Delete card by ID from server
   deleteCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
-    }).then(this._handleServerResponse);
+    })
+      .then((res) => this._handleServerResponse(res))
+      .then((data) => this._extractData(data));
   }
   //Like card by ID on server
   cardLikeStatus(cardId, isLiked) {
     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: isLiked ? "DELETE" : "PUT",
       headers: this._headers,
-    }).then(this._handleServerResponse);
+    })
+      .then((res) => this._handleServerResponse(res))
+      .then((data) => this._extractData(data));
+  }
+  addLike(cardId) {
+    return this.cardLikeStatus(cardId, false);
+  }
+
+  removeLike(cardId) {
+    return this.cardLikeStatus(cardId, true);
   }
 
   //USER
@@ -46,7 +72,9 @@ export default class Api {
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
-    }).then(this._handleServerResponse);
+    })
+      .then((res) => this._handleServerResponse(res))
+      .then((data) => this._extractData(data));
   }
   //Update user info on server
   updateUserInfo(data) {
@@ -54,15 +82,24 @@ export default class Api {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify(data),
-    }).then(this._handleServerResponse);
+    })
+      .then((res) => this._handleServerResponse(res))
+      .then((resData) => this._extractData(resData));
   }
   //Update avatar
   updateUserAvatar(avatarLink) {
+    const avatar =
+      typeof avatarLink === "string" ? avatarLink : avatarLink?.avatar;
+    if (!avatar) {
+      return Promise.reject("Avatar link is required");
+    }
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
-      body: JSON.stringify({ avatar: avatarLink }),
-    }).then(this._handleServerResponse);
+      body: JSON.stringify({ avatar }),
+    })
+      .then((res) => this._handleServerResponse(res))
+      .then((data) => this._extractData(data));
   }
 
   getAppInfo() {
