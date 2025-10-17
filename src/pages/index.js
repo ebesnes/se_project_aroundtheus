@@ -144,8 +144,8 @@ function handleDeleteCard(cardID, cardElement) {
         confirmPopup.close();
       })
       .catch((err) => console.error("Failed to delete card:", err));
-    confirmPopup.close();
   });
+  confirmPopup.open();
 }
 
 function handleLikeCard(cardID, cardInstance) {
