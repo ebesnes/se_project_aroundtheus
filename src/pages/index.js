@@ -9,6 +9,8 @@ import PopupWithConfirm from "../components/PopupWithConfirm.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
 
+let currentUserId = null;
+
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
@@ -114,6 +116,7 @@ changeAvatarFormValidator.enableValidation();
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cards]) => {
+    currentUserId = userData._id || userData.id || null;
     userInfo.setUserInfo({
       name: userData.name,
       about: userData.about,
@@ -164,6 +167,7 @@ function handleLikeCard(cardID, cardInstance) {
 function createCard(data) {
   const card = new Card(
     data,
+    currentUserId,
     handleImageClick,
     handleDeleteCard,
     handleLikeCard,

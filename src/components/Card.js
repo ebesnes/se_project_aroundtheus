@@ -1,6 +1,7 @@
 export default class Card {
   constructor(
     data,
+    userId,
     handleImageClick,
     handleDeleteCard,
     handleLikeCard,
@@ -8,8 +9,9 @@ export default class Card {
   ) {
     this._name = data.name;
     this._link = data.link || data.url;
-    this._likes = data.likes || [];
+    this._likes = Array.isArray(data.likes) ? data.likes : [];
     this._id = data._id;
+    this._userId = userId;
 
     this._handleImageClick = handleImageClick;
     this._handleDeleteCard = handleDeleteCard;
@@ -27,11 +29,10 @@ export default class Card {
     return cardElement;
   }
   _updateLikesView() {
-    if (this.isLiked()) {
-      this._likeButton.classList.add("card__like-button_active");
-    } else {
-      this._likeButton.classList.remove("card__like-button_active");
-    }
+    this._likeButton.classList.toggle(
+      "card__like-button_active",
+      this.isLiked()
+    );
   }
 
   _setEventListeners() {
@@ -84,7 +85,18 @@ export default class Card {
   }
 
   isLiked() {
-    return Array.isArray(this._likes) && this._likes.length > 0;
+    if (!Array.isArray(this._likes) || !this._userId) {
+      return false;
+    }
+    return this._likes.some((like) => {
+      if (typeof like === "string") {
+        return like === this._userId;
+      }
+      if (like && typeof like === "object") {
+        return like._id === this._userId || like.id === this._userId;
+      }
+      return false;
+    });
   }
 
   updateLikes(likes) {
