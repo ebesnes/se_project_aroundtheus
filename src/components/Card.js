@@ -9,7 +9,7 @@ export default class Card {
   ) {
     this._name = data.name;
     this._link = data.link || data.url;
-    this._likes = Array.isArray(data.likes) ? data.likes : [];
+    this._isliked = data.isLiked || false;
     this._id = data._id;
     this._userId = userId;
 
@@ -85,22 +85,11 @@ export default class Card {
   }
 
   isLiked() {
-    if (!Array.isArray(this._likes) || !this._userId) {
-      return false;
-    }
-    return this._likes.some((like) => {
-      if (typeof like === "string") {
-        return like === this._userId;
-      }
-      if (like && typeof like === "object") {
-        return like._id === this._userId || like.id === this._userId;
-      }
-      return false;
-    });
+    return this._isliked;
   }
 
-  updateLikes(likes) {
-    this._likes = likes;
+  updateLikes(updatedCardData) {
+    this._isliked = updatedCardData.isLiked;
     this._updateLikesView();
   }
 }

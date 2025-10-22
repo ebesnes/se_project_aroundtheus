@@ -158,7 +158,7 @@ function handleLikeCard(cardID, cardInstance) {
 
   apiCall
     .then((updatedCard) => {
-      cardInstance.updateLikes(updatedCard.likes);
+      cardInstance.updateLikes(updatedCard);
     })
     .catch((err) => console.error("Failed to toggle like:", err));
 }
