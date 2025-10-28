@@ -40,7 +40,7 @@ cardPreviewPopup.setEventListeners();
 const profileEditPopup = new PopupWithForm(
   selectors.profileEditModal,
   (formData) => {
-    api
+    return api
       .updateUserInfo({
         name: formData.name,
         about: formData.description,
@@ -59,7 +59,7 @@ const profileEditPopup = new PopupWithForm(
 profileEditPopup.setEventListeners();
 
 const addCardPopup = new PopupWithForm(selectors.addCardModal, (formData) => {
-  api
+  return api
     .addCard({
       name: formData.title,
       link: formData.url,
@@ -81,7 +81,7 @@ confirmPopup.setEventListeners();
 const changeAvatarPopup = new PopupWithForm(
   selectors.changeAvatarModal,
   (formData) => {
-    api
+    return api
       .updateUserAvatar(formData.url)
       .then((userData) => {
         userInfo.setUserInfo({
