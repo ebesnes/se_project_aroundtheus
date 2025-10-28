@@ -114,7 +114,8 @@ editFormValidator.enableValidation();
 cardFormValidator.enableValidation();
 changeAvatarFormValidator.enableValidation();
 
-Promise.all([api.getUserInfo(), api.getInitialCards()])
+api
+  .getAppInfo()
   .then(([userData, cards]) => {
     currentUserId = userData._id || userData.id || null;
     userInfo.setUserInfo({
@@ -196,11 +197,6 @@ document.querySelector(".profile__add-button").addEventListener("click", () => {
 const avatarEditButton = document.querySelector(".profile__image-edit");
 if (avatarEditButton) {
   avatarEditButton.addEventListener("click", () => {
-    const avatarInput = document.querySelector("#avatar-input-url");
-    const { avatar } = userInfo.getUserInfo();
-    if (avatarInput) {
-      avatarInput.value = avatar || "";
-    }
     changeAvatarFormValidator.resetValidation();
     changeAvatarPopup.open();
   });
